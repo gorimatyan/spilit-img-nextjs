@@ -5,7 +5,7 @@ import styles from '../styles/ImgCanvas.module.css'
 
 
 const ImgCanvas: NextPage = () => {
-    const canvasRef = useRef(null);
+    const canvasRef = useRef(null); // useRefは基本的にDOMの参照をするために使用する
 
     // canvasRefのDOMを取得する
     const getContext = (): CanvasRenderingContext2D => {
@@ -47,10 +47,14 @@ const ImgCanvas: NextPage = () => {
         // console.log(ctx.getImageData);
         // console.log(mouseX);
     }
-    const onMouseUp = (e: MouseEvent) => {
+    const onMouseMove = (e: MouseEvent) => {
         setMouseX(e.clientX);
         setMouseY(e.clientY);
     }
+    // const onMouseUp = (e: MouseEvent) => {
+    //     setMouseX(e.clientX);
+    //     setMouseY(e.clientY);
+    // }
     const [sliderValue, setSliderValue] = useState<any>(10);
     const changeSliderValue = (e: ChangeEvent<HTMLInputElement>) => {
         console.log(sliderValue);
@@ -68,7 +72,8 @@ const ImgCanvas: NextPage = () => {
                     height="200"
                     draggable
                     onDrag={(e) => onDrag(e)}
-                    onMouseUp={(e) => onMouseUp(e)}
+                    // onMouseUp={(e) => onMouseUp(e)}
+                    onMouseMove={(e) => onMouseMove(e)}
                 />
             </div>
             <input type="range" min="0" max="100" step="1" value={sliderValue} onChange={(e) => changeSliderValue(e)}/>
